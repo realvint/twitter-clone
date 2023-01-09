@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @tweets = Tweet.all
+    redirect_to dashboard_path if user_signed_in?
   end
 end
