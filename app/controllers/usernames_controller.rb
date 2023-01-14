@@ -5,8 +5,16 @@ class UsernamesController < ApplicationController
   def new; end
 
   def update
-    current_user.update(username_params)
-    redirect_to dashboard_path
+    if username_params[:username].present? && current_user.update(username_params)
+      redirect_to dashboard_path, notice: 'Никнейм обновлён'
+    else
+      flash.now[:alert] = if username_params[:username].blank?
+                            'Укажите ваш никнейм'
+                          else
+                            current_user.errors.full_messages.join(', ')
+                          end
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
