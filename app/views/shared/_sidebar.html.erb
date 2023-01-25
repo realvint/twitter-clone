@@ -1,0 +1,55 @@
+<aside class="side-navbar">
+  <%= link_to root_path, class: 'px-2' do %>
+    <div class="d-inline-flex align-items-center rounded-circle px-2 py-2">
+      <%= image_tag 'twitter.png', width: '32' %>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link my-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'home-white.png', width: '32' %></span>
+      <span class="fs-5">Главная</span>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link mb-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'explore.png', width: '32' %></span>
+      <span class="fs-5">Обзор</span>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link mb-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'notification.png', width: '32' %></span>
+      <span class="fs-5">Уведомления</span>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link mb-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'messages.png', width: '32' %></span>
+      <span class="fs-5">Сообщения</span>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link mb-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'bookmark-white.png', width: '32' %></span>
+      <span class="fs-5">Закладки</span>
+    </div>
+  <% end %>
+
+  <%= link_to '#', class: 'nav-link mb-3' do %>
+    <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
+      <span class="me-3"><%= image_tag 'user.png', width: '32' %></span>
+      <span class="fs-5">Профиль</span>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= link_to 'Создать Твит', '', class: 'btn btn-lg btn-tw rounded-pill w-100' %>
+  </div>
+
+  <%= link_to 'Выйти', destroy_user_session_path, data: { turbo_method: :delete }, class: 'blue-link ms-3' %>
+</aside>
