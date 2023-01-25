@@ -1,0 +1,10 @@
+.tweet-input {
+  border: 0;
+  font-size: 1.4rem;
+
+  &:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
