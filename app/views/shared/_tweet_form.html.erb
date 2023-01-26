@@ -1,0 +1,8 @@
+<%= form_with model: Tweet.new, url: tweets_path do |f| %>
+  <div class="mt-3">
+    <%= f.text_area :body, placeholder: 'Напишите что-нибудь здесь', class: 'form-control tweet-input' %>
+  </div>
+  <div class="mt-3 text-end">
+    <%= f.submit 'Добавить', class: 'btn btn-tw rounded-pill' %>
+  </div>
+<% end %>
