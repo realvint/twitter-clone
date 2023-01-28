@@ -5,12 +5,12 @@
     </div>
     <div class="col-7">
       <h3><%= link_to 'Главная', dashboard_path, class: 'nav-link' %></h3>
+      <div class="mb-3">
         <%= render 'shared/tweet_form' %>
-      <ul>
-        <% @tweets.find_each do |tweet| %>
-          <li><%= tweet.body %></li>
-        <% end %>
-      </ul>
+      </div>
+      <div id='tweets'>
+        <%= render @tweets %>
+      </div>
     </div>
     <div class="col"></div>
   </div>
