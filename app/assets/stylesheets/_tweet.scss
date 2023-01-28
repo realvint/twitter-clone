@@ -1,0 +1,11 @@
+.tweet {
+  -moz-transition: all .1ms ease-in;
+  -o-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+
+  &:hover {
+    background-color: $gray-100;
+    cursor: pointer;
+  }
+}
