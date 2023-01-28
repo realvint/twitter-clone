@@ -1,17 +1,24 @@
 <div class="card px-4 pt-3 devise-form shadow">
-  <h2>Информация</h2>
+  <h2>Личный профиль</h2>
 
   <%= form_with model: current_user, url: username_path(current_user), html: { data: { turbo: false } } do |f| %>
     <div class="mb-3 mt-2">
       <%= f.label :username, class: 'form-label' %>
       <%= f.text_field :username, autofocus: true, class: 'form-control' %>
     </div>
-    <div class="mb-3 mt-2">
+
+    <div class="mb-3">
       <%= f.label :display_name, class: 'form-label' %>
       <%= f.text_field :display_name, class: 'form-control' %>
     </div>
-    <div class="actions mb-3">
-      <%= f.submit "Сохранить", class: 'btn btn-tw rounded-pill' %>
+
+    <div class="mb-4">
+      <%= f.label :avatar, class: 'form-label' %>
+      <%= f.file_field :avatar, class: 'form-control' %>
+    </div>
+
+    <div class="actions mb-4">
+      <%= f.submit "Сохранить", class: 'btn btn-tw rounded-pill w-100' %>
     </div>
   <% end %>
 </div>
