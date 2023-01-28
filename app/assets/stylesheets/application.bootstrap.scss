@@ -1,6 +1,28 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'navbar';
+@import 'forms';
+@import 'tweet';
+
+$twitter-blue: #499be9;
+
+.btn-tw {
+  background-color: $twitter-blue;
+  color: $white;
+
+  &:hover {
+    background-color: #4390d9;
+    color: $white;
+  }
+}
+
+a.blue-link {
+  color: $twitter-blue ;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 
 .devise-form {
   margin: 5% auto auto;

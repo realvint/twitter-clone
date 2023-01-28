@@ -1,0 +1,10 @@
+<%= turbo_frame_tag dom_id(tweet) do %>
+  <div class="tweet pt-3 pb-1 px-3">
+    <% if (Time.zone.now - tweet.created_at) > 1.day %>
+      <p>@<%= tweet.user.username %> - <%= tweet.created_at.strftime('%b %-d') %></p>
+    <% else %>
+      <p>@<%= tweet.user.username %> - <%= time_ago_in_words(tweet.created_at) %></p>
+    <% end %>
+    <p><%= tweet.body %></p>
+  </div>
+<% end %>
