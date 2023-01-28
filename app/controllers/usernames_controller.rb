@@ -6,7 +6,7 @@ class UsernamesController < ApplicationController
 
   def update
     if username_params[:username].present? && current_user.update(username_params)
-      redirect_to dashboard_path, notice: 'Никнейм обновлён'
+      redirect_to dashboard_path, notice: 'Учётная запись обновлена'
     else
       flash.now[:alert] = if username_params[:username].blank?
                             'Укажите ваш никнейм'
@@ -20,6 +20,6 @@ class UsernamesController < ApplicationController
   private
 
   def username_params
-    params.require(:user).permit(:username)
+    params.require(:user).permit(:username, :display_name)
   end
 end
