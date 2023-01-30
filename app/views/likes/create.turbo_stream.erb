@@ -1,3 +1,3 @@
-<%= turbo_stream.prepend 'tweets' do %>
+<%= turbo_stream.replace  dom_id(@tweet) do %>
   <%= render partial: 'tweets/tweet', locals: { tweet_presenter: TweetPresenter.new(tweet: @tweet, current_user: current_user) } %>
 <% end %>

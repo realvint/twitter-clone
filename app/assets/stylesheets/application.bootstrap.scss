@@ -1,10 +1,10 @@
+$twitter-blue: #499be9;
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'navbar';
 @import 'forms';
 @import 'tweet';
-
-$twitter-blue: #499be9;
 
 .btn-tw {
   background-color: $twitter-blue;

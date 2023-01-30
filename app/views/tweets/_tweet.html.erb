@@ -1,10 +1,47 @@
-<%= turbo_frame_tag dom_id(tweet) do %>
-  <div class="tweet pt-3 pb-1 px-3">
-    <% if (Time.zone.now - tweet.created_at) > 1.day %>
-      <p>@<%= tweet.user.username %> - <%= tweet.created_at.strftime('%b %-d') %></p>
-    <% else %>
-      <p>@<%= tweet.user.username %> - <%= time_ago_in_words(tweet.created_at) %></p>
-    <% end %>
-    <p><%= tweet.body %></p>
+<%= turbo_frame_tag dom_id(tweet_presenter.tweet) do %>
+  <div class="tweet d-flex pt-3 pb-1 px-3">
+    <div class="flex-shrink-0">
+      <%= image_tag tweet_presenter.avatar, size: 48, class: 'rounded-circle' if tweet_presenter.avatar.present? %>
+    </div>
+    <div class="flex-grow-1 ms-3">
+      <p class="mb-0">
+        <span class="fw-semibold"><%= tweet_presenter.display_name %></span>
+        <span class="text-muted"> @<%= tweet_presenter.username %> - <%= tweet_presenter.created_at %></span>
+      </p>
+      <p><%= tweet_presenter.body %></p>
+
+      <div class="d-flex justify-content-between action-links">
+        <div>
+          <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted views' do %>
+            <%= image_tag 'bar-chart.png', size: 20 %>
+            <span class="ps-2">views</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted replies' do %>
+            <%= image_tag 'speech-bubble.png', size: 20 %>
+            <span class="ps-2"> replies</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted retweets' do %>
+            <%= image_tag 'retweet.png', size: 20 %>
+            <span class="ps-2">retweets</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to tweet_presenter.like_tweet_url, data: { 'turbo-method': tweet_presenter.turbo_data_method }, class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
+            <%= image_tag tweet_presenter.like_heart_img, size: 20 %>
+            <span class="ps-2"><%= tweet_presenter.likes_count %></span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted bookmark' do %>
+            <%= image_tag 'bookmark-white.png', size: 20 %>
+            <span class="ps-2">bookmark</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
