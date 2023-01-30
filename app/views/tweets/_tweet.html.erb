@@ -25,20 +25,21 @@
         </div>
         <div>
           <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted retweets' do %>
-            <%= image_tag 'retweet.png', size: 20 %>
+            <%= image_tag 'retweet-black.png', size: 20 %>
             <span class="ps-2">retweets</span>
           <% end %>
         </div>
         <div>
-          <%= link_to tweet_presenter.like_tweet_url, data: { 'turbo-method': tweet_presenter.turbo_data_method }, class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
+          <%= link_to tweet_presenter.like_tweet_url, data: { 'turbo-method': tweet_presenter.turbo_like_data_method }, class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
             <%= image_tag tweet_presenter.like_heart_img, size: 20 %>
             <span class="ps-2"><%= tweet_presenter.likes_count %></span>
           <% end %>
         </div>
         <div>
-          <%= link_to '#', class: 'd-inline-flex align-items-center nav-link text-muted bookmark' do %>
-            <%= image_tag 'bookmark-white.png', size: 20 %>
-            <span class="ps-2">bookmark</span>
+          <%= link_to tweet_presenter.bookmark_tweet_url,
+            data: { 'turbo-method': tweet_presenter.turbo_bookmark_data_method },
+            class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: tweet_presenter.bookmark_text do %>
+            <%= image_tag tweet_presenter.bookmark_img, size: 20 %>
           <% end %>
         </div>
       </div>
