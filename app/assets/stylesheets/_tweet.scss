@@ -9,3 +9,18 @@
     cursor: pointer;
   }
 }
+
+.action-links {
+  a {
+    &.views, &.replies, &.bookmark, &.retweets {
+      &:hover {
+        color: $twitter-blue !important;
+      }
+    }
+    &.likes {
+      &:hover {
+        color: $red-500 !important;
+      }
+    }
+  }
+}

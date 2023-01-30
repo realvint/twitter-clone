@@ -9,7 +9,7 @@
         <%= render 'shared/tweet_form' %>
       </div>
       <div id='tweets'>
-        <%= render @tweets %>
+        <%= render partial: 'tweets/tweet', collection: @tweets, as: :tweet_presenter %>
       </div>
     </div>
     <div class="col"></div>
