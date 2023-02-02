@@ -12,11 +12,18 @@
 
 .action-links {
   a {
-    &.views, &.replies, &.bookmark, &.retweets {
+    &.views, &.replies, &.bookmark {
       &:hover {
         color: $twitter-blue !important;
       }
     }
+
+    &.retweets {
+      &:hover {
+        color: $green-500 !important;
+      }
+    }
+
     &.likes {
       &:hover {
         color: $red-500 !important;

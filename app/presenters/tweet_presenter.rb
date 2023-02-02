@@ -9,7 +9,7 @@ class TweetPresenter
     @current_user = current_user
   end
 
-  delegate :user, :body, :likes_count, to: :tweet
+  delegate :user, :body, :likes_count, :retweets_count, to: :tweet
   delegate :display_name, :username, :avatar, to: :user
 
   def created_at
@@ -28,7 +28,7 @@ class TweetPresenter
     end
   end
 
-  def turbo_data_method
+  def turbo_like_data_method
     if tweet_liked_by_current_user?
       'delete'
     else
@@ -44,6 +44,70 @@ class TweetPresenter
     end
   end
 
+  def bookmark_tweet_url
+    if tweet_bookmarked_by_current_user?
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+    else
+      tweet_bookmarks_path(tweet)
+    end
+  end
+
+  def turbo_bookmark_data_method
+    if tweet_bookmarked_by_current_user?
+      'delete'
+    else
+      'post'
+    end
+  end
+
+  def bookmark_img
+    if tweet_bookmarked_by_current_user?
+      'bookmark-blue.png'
+    else
+      'bookmark-white.png'
+    end
+  end
+
+  def bookmark_text
+    if tweet_bookmarked_by_current_user?
+      'Убрать из закладок'
+    else
+      'Сохранить в закладки'
+    end
+  end
+
+  def retweet_tweet_url
+    if tweet_retweeted_by_current_user?
+      tweet_retweet_path(tweet, current_user.retweets.find_by(tweet: tweet))
+    else
+      tweet_retweets_path(tweet)
+    end
+  end
+
+  def turbo_retweet_data_method
+    if tweet_retweeted_by_current_user?
+      'delete'
+    else
+      'post'
+    end
+  end
+
+  def retweet_img
+    if tweet_retweeted_by_current_user?
+      'retweet-green.png'
+    else
+      'retweet-black.png'
+    end
+  end
+
+  def retweet_text
+    if tweet_retweeted_by_current_user?
+      'Убрать из перепостов'
+    else
+      'Перепостить себе'
+    end
+  end
+
   private
 
   def tweet_liked_by_current_user
@@ -51,4 +115,16 @@ class TweetPresenter
   end
 
   alias tweet_liked_by_current_user? tweet_liked_by_current_user
+
+  def tweet_bookmarked_by_current_user
+    @tweet_bookmarked_by_current_user ||= tweet.bookmarked_users.include?(current_user)
+  end
+
+  alias tweet_bookmarked_by_current_user? tweet_bookmarked_by_current_user
+
+  def tweet_retweeted_by_current_user
+    @tweet_retweeted_by_current_user ||= tweet.retweeted_users.include?(current_user)
+  end
+
+  alias tweet_retweeted_by_current_user? tweet_retweeted_by_current_user
 end
