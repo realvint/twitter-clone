@@ -1,6 +1,10 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @tweet = Tweet.find(params[:id])
+  end
+
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
 
