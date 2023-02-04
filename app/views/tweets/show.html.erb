@@ -6,7 +6,65 @@
     <div class="col-7">
       <h3><%= link_to 'Назад', dashboard_path, class: 'nav-link' %></h3>
       <div class="mb-3">
-        <h1>Tweet <%= @tweet.body %></h1>
+        <%= turbo_frame_tag dom_id(@tweet_presenter.tweet) do %>
+          <div data-controller='' data-tweet-path='<%= tweet_path(@tweet_presenter.tweet) %>' class="tweet d-flex pt-3 pb-1 px-3">
+            <div class="flex-shrink-0">
+              <%= image_tag @tweet_presenter.avatar, size: 48, class: 'rounded-circle' if @tweet_presenter.avatar.present? %>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="fw-semibold mb-0"><%= @tweet_presenter.display_name %></p>
+              <p class="text-muted mb-1"> @<%= @tweet_presenter.username %></p>
+
+              <p class="fs-4 mb-2"><%= @tweet_presenter.body %></p>
+              <p class="text-muted"><%= @tweet_presenter.tweet.created_at.strftime('%H:%M - %b %d, %Y') %></p>
+
+              <hr>
+              <div class="d-flex justify-content-evenly">
+                <div class=""><span class="fw-semibold">1</span> Views</div>
+                <div class=""><span class="fw-semibold"><%= @tweet_presenter.retweets_count %></span> Retweets</div>
+                <div class="me-4"><span class="fw-semibold"><%= @tweet_presenter.likes_count %></span> Likes</div>
+              </div>
+
+              <hr>
+              <div class="d-flex justify-content-evenly action-links">
+                <div>
+                  <%= link_to '#', data: { 'ignore-click': true }, class: 'd-inline-flex align-items-center nav-link text-muted views' do %>
+                    <%= image_tag 'bar-chart.png', size: 24 %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to tweet_path(@tweet_presenter.tweet), data: { 'ignore-click': false },
+                    class: 'd-inline-flex align-items-center nav-link text-muted replies' do %>
+                    <%= image_tag 'speech-bubble.png', size: 24 %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to @tweet_presenter.retweet_tweet_url,
+                    data: { 'turbo-method': @tweet_presenter.turbo_retweet_data_method, 'ignore-click': true },
+                    class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: @tweet_presenter.retweet_text do %>
+                    <%= image_tag @tweet_presenter.retweet_img, size: 24 %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to @tweet_presenter.like_tweet_url,
+                    data: { 'turbo-method': @tweet_presenter.turbo_like_data_method, 'ignore-click': true},
+                    class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
+                    <%= image_tag @tweet_presenter.like_heart_img, size: 24 %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to @tweet_presenter.bookmark_tweet_url,
+                    data: { 'turbo-method': @tweet_presenter.turbo_bookmark_data_method, 'ignore-click': true },
+                    class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: @tweet_presenter.bookmark_text do %>
+                    <%= image_tag @tweet_presenter.bookmark_img, size: 24 %>
+                  <% end %>
+                </div>
+              </div>
+
+              <hr class="mt-2">
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="col"></div>
