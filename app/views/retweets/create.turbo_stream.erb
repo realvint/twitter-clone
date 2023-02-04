@@ -1,3 +1,17 @@
-<%= turbo_stream.replace  dom_id(@tweet) do %>
-  <%= render partial: 'tweets/tweet', locals: { tweet_presenter: TweetPresenter.new(tweet: @tweet, current_user: current_user) } %>
+<%
+  target_id = if params[:source] == 'tweet_show'
+                'tweet_stats'
+              else
+                dom_id(@tweet)
+              end
+
+  partial_name =  if params[:source] == 'tweet_show'
+                    'tweets/show_stats'
+                  else
+                    'tweets/tweet'
+                  end
+%>
+
+<%= turbo_stream.replace target_id do %>
+  <%= render partial: partial_name, locals: { tweet_presenter: TweetPresenter.new(tweet: @tweet, current_user: current_user) } %>
 <% end %>

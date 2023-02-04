@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import TweetCardController from "./tweet_card_controller"
+application.register("tweet-card", TweetCardController)
 
 import TweetFormController from "./tweet_form_controller"
 application.register("tweet-form", TweetFormController)

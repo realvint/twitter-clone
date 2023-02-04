@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-7">
+      <h3><%= link_to 'Назад', dashboard_path, class: 'nav-link' %></h3>
+      <div class="mb-3">
+        <div data-tweet-path='<%= tweet_path(@tweet_presenter.tweet) %>' class="tweet d-flex pt-3 pb-1 px-3">
+            <div class="flex-shrink-0">
+              <%= image_tag @tweet_presenter.avatar, size: 48, class: 'rounded-circle' if @tweet_presenter.avatar.present? %>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <p class="fw-semibold mb-0"><%= @tweet_presenter.display_name %></p>
+              <p class="text-muted mb-1"> @<%= @tweet_presenter.username %></p>
+
+              <p class="fs-4 mb-2"><%= @tweet_presenter.body %></p>
+              <p class="text-muted"><%= @tweet_presenter.tweet.created_at.strftime('%H:%M - %b %d, %Y') %></p>
+
+              <%= render 'show_stats', tweet_presenter: @tweet_presenter %>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
