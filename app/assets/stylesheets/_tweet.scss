@@ -4,19 +4,28 @@
   -webkit-transition: all .1s ease-in;
   transition: all .1s ease-in;
 
-  &:hover {
-    background-color: $gray-100;
-    cursor: pointer;
+  &.hover {
+    &:hover {
+      background-color: $gray-100;
+      cursor: pointer;
+    }
   }
 }
 
 .action-links {
   a {
-    &.views, &.replies, &.bookmark, &.retweets {
+    &.views, &.replies, &.bookmark {
       &:hover {
         color: $twitter-blue !important;
       }
     }
+
+    &.retweets {
+      &:hover {
+        color: $green-500 !important;
+      }
+    }
+
     &.likes {
       &:hover {
         color: $red-500 !important;
