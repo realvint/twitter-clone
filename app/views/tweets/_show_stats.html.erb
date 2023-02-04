@@ -2,7 +2,7 @@
   <div>
     <hr>
     <div class="d-flex justify-content-evenly">
-      <div class=""><span class="fw-semibold">1</span> Views</div>
+      <div class=""><span class="fw-semibold"><%= tweet_presenter.views_count %></span> Views</div>
       <div class=""><span class="fw-semibold"><%= tweet_presenter.retweets_count %></span> Retweets</div>
       <div class="me-4"><span class="fw-semibold"><%= tweet_presenter.likes_count %></span> Likes</div>
     </div>
@@ -16,28 +16,28 @@
       </div>
       <div>
         <%= link_to tweet_path(tweet_presenter.tweet),
-                    class: 'd-inline-flex align-items-center nav-link text-muted replies' do %>
+          class: 'd-inline-flex align-items-center nav-link text-muted replies' do %>
           <%= image_tag 'speech-bubble.png', size: 24 %>
         <% end %>
       </div>
       <div>
         <%= link_to tweet_presenter.retweet_tweet_url(source: 'tweet_show'),
-                    data: { 'turbo-method': tweet_presenter.turbo_retweet_data_method },
-                    class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: tweet_presenter.retweet_text do %>
+          data: { 'turbo-method': tweet_presenter.turbo_retweet_data_method },
+          class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: tweet_presenter.retweet_text do %>
           <%= image_tag tweet_presenter.retweet_img, size: 24 %>
         <% end %>
       </div>
       <div>
         <%= link_to tweet_presenter.like_tweet_url(source: 'tweet_show'),
-                    data: { 'turbo-method': tweet_presenter.turbo_like_data_method },
-                    class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
+          data: { 'turbo-method': tweet_presenter.turbo_like_data_method },
+          class: 'd-inline-flex align-items-center nav-link text-muted likes' do %>
           <%= image_tag tweet_presenter.like_heart_img, size: 24 %>
         <% end %>
       </div>
       <div>
         <%= link_to tweet_presenter.bookmark_tweet_url(source: 'tweet_show'),
-                    data: { 'turbo-method': tweet_presenter.turbo_bookmark_data_method },
-                    class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: tweet_presenter.bookmark_text do %>
+          data: { 'turbo-method': tweet_presenter.turbo_bookmark_data_method },
+          class: 'd-inline-flex align-items-center nav-link text-muted bookmark', title: tweet_presenter.bookmark_text do %>
           <%= image_tag tweet_presenter.bookmark_img, size: 24 %>
         <% end %>
       </div>
