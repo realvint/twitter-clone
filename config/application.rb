@@ -54,5 +54,6 @@ module TwitterClone
 
     # GZip all responses
     config.middleware.use Rack::Deflater
+    config.active_job.queue_adapter = :delayed_job
   end
 end

@@ -2,7 +2,8 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    create_view_record unless View.exists?(user: current_user, tweet: tweet)
+    ViewTweetJob.perform_later(tweet: tweet, user: current_user)
+
     @tweet_presenter = TweetPresenter.new(tweet: tweet, current_user: current_user)
   end
 
@@ -25,9 +26,5 @@ class TweetsController < ApplicationController
 
   def tweet
     @tweet ||= Tweet.find(params[:id])
-  end
-
-  def create_view_record
-    View.create(tweet: tweet, user: current_user)
   end
 end
