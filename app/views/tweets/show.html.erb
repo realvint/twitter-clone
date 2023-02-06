@@ -6,20 +6,27 @@
     <div class="col-7">
       <h3><%= link_to 'Назад', dashboard_path, class: 'nav-link' %></h3>
       <div class="mb-3">
-        <div data-tweet-path='<%= tweet_path(@tweet_presenter.tweet) %>' class="tweet d-flex pt-3 pb-1 px-3">
+        <div data-tweet-path='<%= tweet_path(@tweet_presenter.tweet) %>' class="tweet pt-3 pb-1">
+          <div class="d-flex">
             <div class="flex-shrink-0">
               <%= image_tag @tweet_presenter.avatar, size: 48, class: 'rounded-circle' if @tweet_presenter.avatar.present? %>
             </div>
             <div class="flex-grow-1 ms-3">
               <p class="fw-semibold mb-0"><%= @tweet_presenter.display_name %></p>
               <p class="text-muted mb-1"> @<%= @tweet_presenter.username %></p>
-
-              <p class="fs-4 mb-2"><%= @tweet_presenter.body %></p>
-              <p class="text-muted"><%= @tweet_presenter.tweet.created_at.strftime('%H:%M - %b %d, %Y') %></p>
-
-              <%= render 'show_stats', tweet_presenter: @tweet_presenter %>
             </div>
           </div>
+
+          <p class="fs-4 my-2"><%= @tweet_presenter.body %></p>
+          <p class="text-muted"><%= @tweet_presenter.tweet.created_at.strftime('%H:%M - %b %d, %Y') %></p>
+
+          <%= render 'show_stats', tweet_presenter: @tweet_presenter %>
+        </div>
+      </div>
+      <%= render 'shared/tweet_form', form_submit_path: tweet_reply_tweets_path(@tweet_presenter.tweet), btn_text: 'Ответить' %>
+
+      <div id='reply_tweets'>
+        <%= render partial: 'tweets/tweet', collection: @reply_tweets_in_presenter, as: :tweet_presenter %>
       </div>
     </div>
     <div class="col"></div>

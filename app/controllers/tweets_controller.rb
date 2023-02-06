@@ -5,6 +5,11 @@ class TweetsController < ApplicationController
     ViewTweetJob.perform_later(tweet: tweet, user: current_user)
 
     @tweet_presenter = TweetPresenter.new(tweet: tweet, current_user: current_user)
+
+    @reply_tweets_in_presenter = tweet.reply_tweets.includes(:liked_users, :bookmarked_users, :retweeted_users, :user)
+                                      .order(created_at: :desc).map do |reply_tweet|
+      TweetPresenter.new(tweet: reply_tweet, current_user: current_user)
+    end
   end
 
   def create
