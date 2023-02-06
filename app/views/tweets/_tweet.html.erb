@@ -21,7 +21,7 @@
           <%= link_to tweet_path(tweet_presenter.tweet), data: { 'ignore-click': true },
             class: 'd-inline-flex align-items-center nav-link text-muted replies' do %>
             <%= image_tag 'speech-bubble.png', size: 20 %>
-            <span class="ps-2"> replies</span>
+            <span class="ps-2"><%= tweet_presenter.reply_tweets_count %></span>
           <% end %>
         </div>
         <div>

@@ -1,3 +1,7 @@
 <%= turbo_stream.prepend 'reply_tweets' do %>
   <%= render partial: 'tweets/tweet', locals: { tweet_presenter: TweetPresenter.new(tweet: @tweet, current_user: current_user) } %>
 <% end %>
+
+<%= turbo_stream.replace 'tweet_stats' do %>
+  <%= render partial: 'tweets/show_stats', locals: { tweet_presenter: TweetPresenter.new(tweet: @tweet.parent_tweet, current_user: current_user) } %>
+<% end %>
