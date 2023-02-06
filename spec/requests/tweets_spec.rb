@@ -2,12 +2,22 @@ require 'rails_helper'
 
 RSpec.describe 'Tweets', type: :request do
   describe 'GET show' do
-    it 'succeeds' do
-      user = create(:user)
+    let(:user) { create(:user) }
+    let(:tweet) { create(:tweet) }
+
+    before do
       sign_in user
-      tweet = create(:tweet)
+      allow(ViewTweetJob).to receive(:perform_later)
+    end
+
+    it 'succeeds' do
       get tweet_path(tweet)
       expect(response).to have_http_status(:success)
+    end
+
+    it 'queues up ViewedTweetJob' do
+      get tweet_path(tweet)
+      expect(ViewTweetJob).to have_received(:perform_later).with(user: user, tweet: tweet)
     end
   end
 

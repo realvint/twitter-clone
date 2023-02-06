@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :bookmarked_tweets, through: :bookmarks, source: :tweet
   has_many :retweets, dependent: :destroy
   has_many :retweeted_tweets, through: :retweets, source: :tweet
+  has_many :views
+  has_many :viewed_tweets, through: :views, source: :tweet
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
