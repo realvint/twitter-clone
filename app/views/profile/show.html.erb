@@ -1,0 +1,83 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-7">
+      <div class="d-inline-flex align-items-center mb-4">
+        <div>
+          <%= link_to dashboard_path, class: 'nav-link pe-2' do %>
+            <%= image_tag 'back-arrow.png', size: 25, class: 'me-3' %>
+          <% end %>
+        </div>
+        <div>
+          <h4><%= current_user.display_name %></h4>
+          <span class="text-muted">(постов: <%= current_user.tweets.size %>)</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div> <%= image_tag current_user.avatar, size: 150, class: 'rounded-circle' if current_user.avatar.present? %></div>
+          <div>
+            <%= link_to 'Редактировать','#', class: 'btn btn-outline-secondary rounded-pill',
+              data: { 'bs-toggle': 'modal', 'bs-target': '#edit-profile-modal' } %>
+          </div>
+        </div>
+      </div>
+      <%= render 'profile_section'  %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+<div class="modal" id="edit-profile-modal" tabindex="-1" aria-labelledby="edit-profile-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close-modal-btn btn-close ms-0 ps-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-1">
+        <%= form_with model: current_user, url: profile_path, method: :put, data: { controller: 'tweet-form'} do |f| %>
+          <div class="mb-3">
+            <%= f.label :username, class: 'form-label mb-1' %>
+            <%= f.text_field :username, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :display_name, class: 'form-label mb-1' %>
+            <%= f.text_field :display_name, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :bio, class: 'form-label mb-1' %>
+            <%= f.text_area :bio, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :email, class: 'form-label mb-1' %>
+            <%= f.email_field :email, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: 'form-label mb-1' %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :location, class: 'form-label mb-1' %>
+            <%= f.text_field :location, class: 'form-control' %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :url, class: 'form-label mb-1' %>
+            <%= f.text_field :url, class: 'form-control' %>
+          </div>
+
+          <div>
+            <%= f.submit 'Сохранить', class: 'btn btn-tw rounded-pill' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

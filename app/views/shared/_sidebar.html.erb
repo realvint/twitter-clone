@@ -40,7 +40,7 @@
     </div>
   <% end %>
 
-  <%= link_to '#', class: 'nav-link mb-3' do %>
+  <%= link_to profile_path, class: 'nav-link mb-3' do %>
     <div class="d-inline-flex align-items-center rounded-pill px-3 py-2">
       <span class="me-3"><%= image_tag 'user.png', width: '32' %></span>
       <span class="fs-5">Профиль</span>
@@ -50,17 +50,17 @@
   <div class="mb-3">
     <%= link_to 'Создать Твит', '',
       class: 'btn btn-lg btn-tw rounded-pill w-100',
-      data: { 'bs-toggle': 'modal', 'bs-target': '#exModal' } %>
+      data: { 'bs-toggle': 'modal', 'bs-target': '#tweet-modal' } %>
   </div>
 
   <%= link_to 'Выйти', destroy_user_session_path, data: { turbo_method: :delete }, class: 'blue-link ms-3' %>
 </aside>
 
-<div class="modal" id="exModal" tabindex="-1" aria-labelledby="exModal" aria-hidden="true">
+<div class="modal" id="tweet-modal" tabindex="-1" aria-labelledby="tweet-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
-        <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close" id="close-modal-btn"></button>
+        <button type="button" class="close-modal-btn btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <%= render 'shared/tweet_form' %>
