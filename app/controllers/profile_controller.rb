@@ -5,7 +5,11 @@ class ProfileController < ApplicationController
 
   def update
     current_user.update(user_params[:password].blank? ? user_params.except(:password) : user_params)
-    redirect_to profile_path
+
+    respond_to do |format|
+      format.html { redirect_to profile_path }
+      format.turbo_stream
+    end
   end
 
   private
