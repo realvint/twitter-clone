@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_101404) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_193039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_101404) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "followings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "following_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["following_user_id"], name: "index_followings_on_following_user_id"
+    t.index ["user_id", "following_user_id"], name: "index_followings_on_user_id_and_following_user_id", unique: true
+    t.index ["user_id"], name: "index_followings_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -137,6 +147,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_101404) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "followings", "users"
+  add_foreign_key "followings", "users", column: "following_user_id"
   add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
   add_foreign_key "retweets", "tweets"

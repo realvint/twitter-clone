@@ -10,6 +10,10 @@ RSpec.describe User, type: :model do
   it { should have_many(:retweeted_tweets).through(:retweets).source(:tweet) }
   it { should have_many(:views) }
   it { should have_many(:viewed_tweets).through(:views).source(:tweet) }
+  it { should have_many(:followings).dependent(:destroy) }
+  it { should have_many(:following_users).through(:followings) }
+  it { should have_many(:reverse_followings).with_foreign_key(:following_user_id).class_name('Following') }
+  it { should have_many(:followers).through(:reverse_followings).source(:user) }
 
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
