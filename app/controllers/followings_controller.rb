@@ -3,19 +3,28 @@ class FollowingsController < ApplicationController
 
   def create
     following = user.followings.create(following_params)
-    redirect_to user_path(User.find(following_params[:following_user_id]))
+
+    respond_to do |format|
+      format.html { redirect_to user_path(following.following_user) }
+      format.turbo_stream
+    end
   end
 
   def destroy
+    user
     following = Following.find(params[:id])
     following.destroy
-    redirect_to user_path(User.find(following.following_user_id))
+
+    respond_to do |format|
+      format.html {  redirect_to user_path(following.following_user) }
+      format.turbo_stream
+    end
   end
 
   private
 
   def following_params
-    params.permit(:following_user_id)
+    params.permit(:following_user_id, :user_id)
   end
 
   def user

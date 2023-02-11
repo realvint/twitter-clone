@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "follow-unfollow-btn" do %>
+  <% if user.followers.include?(current_user)  %>
+    <%= link_to 'Отписаться', user_following_path(user, current_user.followings.find_by(following_user_id: user)),
+      data: { 'turbo-method': 'delete' }, class: 'btn btn-outline-secondary rounded-pill' %>
+  <% else %>
+    <%= link_to 'Подписаться', user_followings_path(current_user, following_user_id: user.id),
+      data: { 'turbo-method': 'post' }, class: 'btn btn-tw rounded-pill' %>
+  <% end %>
+<% end %>

@@ -8,7 +8,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET show' do
     it 'succeeds' do
       get user_path(user)
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
   end
 end

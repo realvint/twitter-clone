@@ -18,9 +18,7 @@
       <div class="mb-3">
         <div class="d-flex justify-content-between align-items-center">
           <div> <%= image_tag @user.avatar, size: 150, class: 'rounded-circle' if @user.avatar.present? %></div>
-          <div>
-            <%= link_to 'Подписаться','#', class: 'btn btn-outline-secondary rounded-pill' %>
-          </div>
+          <%= render 'users/follow_btn', user: @user, current_user: current_user %>
         </div>
       </div>
       <%= render 'profile/profile_section', user: @user %>
