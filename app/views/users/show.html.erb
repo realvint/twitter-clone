@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <%= render 'shared/sidebar' %>
+    </div>
+    <div class="col-7">
+      <div class="d-inline-flex align-items-center mb-4">
+        <div>
+          <%= link_to dashboard_path, class: 'nav-link pe-2' do %>
+            <%= image_tag 'back-arrow.png', size: 25, class: 'me-3' %>
+          <% end %>
+        </div>
+        <div>
+          <h4><%= @user.display_name %></h4>
+          <span class="text-muted">(постов: <%= @user.tweets.size %>)</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div> <%= image_tag @user.avatar, size: 150, class: 'rounded-circle' if @user.avatar.present? %></div>
+          <div>
+            <%= link_to 'Подписаться','#', class: 'btn btn-outline-secondary rounded-pill' %>
+          </div>
+        </div>
+      </div>
+      <%= render 'profile/profile_section', user: @user %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
